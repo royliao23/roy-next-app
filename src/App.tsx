@@ -47,9 +47,12 @@ function App() {
         `${process.env.NEXT_PUBLIC_URL}/api/getAddresses?postcode=${values.postCode}&streetnumber=${values.houseNumber}`
       );
       
-      if (!response.ok) throw new Error('Address lookup failed');
-      
       const data = await response.json();
+    
+    if (!response.ok) {
+      // Use the error message from API response if available
+      throw new Error(data.errormessage || 'Address lookup failed');
+    }
       
       // FIX: Use data.details instead of data.addresses
       const transformed = data.details.map((addr: any) => 
@@ -63,10 +66,11 @@ function App() {
       
       setAddresses(transformed);
     } catch (err) {
-      setError('Failed to fetch addresses. Please try again.');
-    } finally {
-      setIsLoading(false);
-    }
+    // Display the error message from the API
+    setError(err instanceof Error ? err.message : 'Failed to fetch addresses');
+  } finally {
+    setIsLoading(false);
+  }
   };
 
   const handlePersonSubmit = (e: React.FormEvent) => {
@@ -185,7 +189,7 @@ function App() {
           />
         )}
 
-        {error && <ErrorMessage message={error} />}
+        <div className="errorstyle">{error && <ErrorMessage message={error} />}</div>
 
         <Button variant="clear" onClick={handleClearAll}>
           Clear all fields
