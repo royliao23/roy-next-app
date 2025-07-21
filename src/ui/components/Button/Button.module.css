@@ -1,25 +1,51 @@
 .button {
-  border-radius: var(--border-radius-default);
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
   cursor: pointer;
-  font-size: 0.9em;
-  font-weight: bold;
-  max-width: var(--width-input);
-  padding: 0.5em 1em;
-  margin: 0.5em 0;
-  transition: transform 0.1s ease;
-  width: 100%;
+  font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
 }
 
-.button:hover {
-  transform: scale(1.05);
+/* Variant styles */
+.primary {
+  background-color: #413ef7;
+  color: white;
+  border: 1px solid #413ef7;
 }
 
-.button:active {
-  transform: scale(0.95);
+.secondary {
+  background-color: white;
+  color: #413ef7;
+  border: 1px solid #413ef7;
 }
 
-/** TODO: Create separate styles for .primary and .secondary variants of this button:
-* - Must use the CSS variables declared in App.css
-*/
+.clear {
+  background-color: transparent;
+  color: #333;
+  border: none;
+}
+
+/* Loading state */
+.loading {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Disabled state */
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

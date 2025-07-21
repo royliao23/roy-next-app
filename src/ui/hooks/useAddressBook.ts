@@ -1,7 +1,7 @@
 import {
   addAddress,
   removeAddress,
-  selectAddress,
+  selectAddresses as selectAddress,
   updateAddresses,
 } from "../../core/reducers/addressBookSlice";
 import { Address } from "@/types";

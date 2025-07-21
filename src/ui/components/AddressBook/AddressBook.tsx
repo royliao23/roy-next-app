@@ -6,10 +6,10 @@ import Address from "../Address/Address";
 import Button from "../Button/Button";
 import Card from "../Card/Card";
 import $ from "./AddressBook.module.css";
-import { selectAddress } from "../../../core/reducers/addressBookSlice";
+import { selectAddresses } from "../../../core/reducers/addressBookSlice";
 
 const AddressBook = () => {
-  const addresses = useAppSelector(selectAddress);
+  const addresses = useAppSelector(selectAddresses);
   const { removeAddress, loadSavedAddresses, loading } = useAddressBook();
   const addressBookTitle = `📓 Address book (${addresses.length})`;
 

@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from "react";
-
 import $ from "./InputText.module.css";
 
 interface InputTextProps {
@@ -7,6 +6,8 @@ interface InputTextProps {
   placeholder: string;
   value: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  disabled?: boolean;
+  type?: 'text' | 'number' | 'email' | 'password'; // Add this line
 }
 
 const InputText: FunctionComponent<InputTextProps> = ({
@@ -14,6 +15,8 @@ const InputText: FunctionComponent<InputTextProps> = ({
   onChange,
   placeholder,
   value,
+  disabled = false,
+  type = 'text', // Add default value
 }) => {
   return (
     <input
@@ -22,8 +25,9 @@ const InputText: FunctionComponent<InputTextProps> = ({
       name={name}
       onChange={onChange}
       placeholder={placeholder}
-      type="text"
+      type={type} // Use the prop
       value={value}
+      disabled={disabled}
     />
   );
 };
