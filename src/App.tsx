@@ -50,14 +50,17 @@ function App() {
       if (!response.ok) throw new Error('Address lookup failed');
       
       const data = await response.json();
-      const transformed = data.addresses.map((addr: RawAddressModel) => 
+      
+      // FIX: Use data.details instead of data.addresses
+      const transformed = data.details.map((addr: any) => 
         transformAddress({
           ...addr,
           houseNumber: values.houseNumber,
-          lat: addr.lat || '',
-          lon: addr.lon || ''
+          lat: addr.lat.toString(), // Ensure string type if needed
+          lon: addr.long.toString() // Note: API uses "long" but transform might expect "lon"
         })
       );
+      
       setAddresses(transformed);
     } catch (err) {
       setError('Failed to fetch addresses. Please try again.');
